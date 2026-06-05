@@ -3,7 +3,7 @@ kind: ControlPack
 metadata:
   id: gdpr
   name: gdpr
-  version: v0.1.0
+  version: v0.1.1
   framework_label: GDPR (EU)
 spec:
   controls:
@@ -17,6 +17,6 @@ spec:
     - gdpr-art-32-mfa-privileged
   evidence_sources:
     - source: prowler
-      version: ">=v1.0.0,<v2.0.0"
+      version: ">=v0.1.0,<v1.0.0"
     - source: aws
-      version: ">=v1.0.0,<v2.0.0"
+      version: ">=v0.1.0,<v1.0.0"
