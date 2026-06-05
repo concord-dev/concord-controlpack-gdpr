@@ -1,0 +1,22 @@
+apiVersion: concord.dev/v1
+kind: ControlPack
+metadata:
+  id: gdpr
+  name: gdpr
+  version: v0.1.0
+  framework_label: GDPR (EU)
+spec:
+  controls:
+    - gdpr-art-5-log-retention
+    - gdpr-art-25-no-public-storage
+    - gdpr-art-30-audit-logging
+    - gdpr-art-32-backup-retention
+    - gdpr-art-32-encryption-at-rest
+    - gdpr-art-32-encryption-in-transit
+    - gdpr-art-32-kms-key-rotation
+    - gdpr-art-32-mfa-privileged
+  evidence_sources:
+    - source: prowler
+      version: ">=v1.0.0,<v2.0.0"
+    - source: aws
+      version: ">=v1.0.0,<v2.0.0"
