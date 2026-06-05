@@ -1,0 +1,41 @@
+{
+  "fetched_at": "2026-06-05T00:00:00Z",
+  "provider": "aws",
+  "finding_count": 3,
+  "pass_count": 1,
+  "fail_count": 2,
+  "manual_count": 0,
+  "failures_by_check": {
+    "prowler-rds_instance_backup_enabled": 1,
+    "prowler-dynamodb_tables_pitr_enabled": 1
+  },
+  "failures_by_severity": {"high": 2},
+  "findings": [
+    {
+      "check_id": "prowler-rds_instance_backup_enabled",
+      "title": "RDS instance has automated backups disabled",
+      "status": "FAIL",
+      "severity": "high",
+      "resource_arn": "arn:aws:rds:eu-west-1:111111111111:db:prod-postgres",
+      "remediation": "Set backup_retention_period to >= 7 in the instance config",
+      "compliance": {"gdpr_eu": ["Article 32"]}
+    },
+    {
+      "check_id": "prowler-dynamodb_tables_pitr_enabled",
+      "title": "DynamoDB table has point-in-time recovery disabled",
+      "status": "FAIL",
+      "severity": "high",
+      "resource_arn": "arn:aws:dynamodb:eu-west-1:111111111111:table/user-profiles",
+      "remediation": "dynamodb update-continuous-backups --point-in-time-recovery-specification PointInTimeRecoveryEnabled=true",
+      "compliance": {"gdpr_eu": ["Article 32"]}
+    },
+    {
+      "check_id": "prowler-backup_plans_exist",
+      "title": "AWS Backup plan exists in the account",
+      "status": "PASS",
+      "severity": "informational",
+      "resource_arn": "arn:aws:backup:eu-west-1:111111111111:backup-plan:11111111-2222-3333-4444-555555555555",
+      "compliance": {"gdpr_eu": ["Article 32"]}
+    }
+  ]
+}

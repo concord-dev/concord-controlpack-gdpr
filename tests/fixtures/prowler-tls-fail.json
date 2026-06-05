@@ -1,0 +1,41 @@
+{
+  "fetched_at": "2026-06-05T00:00:00Z",
+  "provider": "aws",
+  "finding_count": 3,
+  "pass_count": 1,
+  "fail_count": 2,
+  "manual_count": 0,
+  "failures_by_check": {
+    "prowler-elbv2_listeners_underneath_tls_version_12": 1,
+    "prowler-cloudfront_distributions_using_deprecated_ssl_protocols": 1
+  },
+  "failures_by_severity": {"high": 2},
+  "findings": [
+    {
+      "check_id": "prowler-elbv2_listeners_underneath_tls_version_12",
+      "title": "ALB listener allows TLS < 1.2",
+      "status": "FAIL",
+      "severity": "high",
+      "resource_arn": "arn:aws:elasticloadbalancing:eu-west-1:111111111111:listener/app/prod-edge/abc/def",
+      "remediation": "Change the security policy to ELBSecurityPolicy-TLS-1-2-2017-01 or stricter",
+      "compliance": {"gdpr_eu": ["Article 32"]}
+    },
+    {
+      "check_id": "prowler-cloudfront_distributions_using_deprecated_ssl_protocols",
+      "title": "CloudFront distribution allows SSLv3/TLSv1.0/1.1",
+      "status": "FAIL",
+      "severity": "high",
+      "resource_arn": "arn:aws:cloudfront::111111111111:distribution/E1ABCDEFGHIJK",
+      "remediation": "Restrict minimum protocol to TLSv1.2_2021",
+      "compliance": {"gdpr_eu": ["Article 32"]}
+    },
+    {
+      "check_id": "prowler-apigateway_restapi_client_certificate_enabled",
+      "title": "API Gateway custom domain uses TLS 1.2+",
+      "status": "PASS",
+      "severity": "informational",
+      "resource_arn": "arn:aws:apigateway:eu-west-1::/domainnames/api.example.com",
+      "compliance": {"gdpr_eu": ["Article 32"]}
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "fetched_at": "2026-06-05T00:00:00Z",
+  "provider": "aws",
+  "finding_count": 3,
+  "pass_count": 1,
+  "fail_count": 2,
+  "manual_count": 0,
+  "failures_by_check": {"prowler-kms_cmk_rotation_enabled": 2},
+  "failures_by_severity": {"medium": 2},
+  "findings": [
+    {
+      "check_id": "prowler-kms_cmk_rotation_enabled",
+      "title": "Customer-managed KMS key has rotation disabled",
+      "status": "FAIL",
+      "severity": "medium",
+      "resource_arn": "arn:aws:kms:eu-west-1:111111111111:key/00000000-aaaa-bbbb-cccc-111111111111",
+      "remediation": "kms enable-key-rotation --key-id <key-id>",
+      "compliance": {"gdpr_eu": ["Article 32"]}
+    },
+    {
+      "check_id": "prowler-kms_cmk_rotation_enabled",
+      "title": "Customer-managed KMS key has rotation disabled",
+      "status": "FAIL",
+      "severity": "medium",
+      "resource_arn": "arn:aws:kms:eu-west-1:111111111111:key/00000000-aaaa-bbbb-cccc-222222222222",
+      "remediation": "kms enable-key-rotation --key-id <key-id>",
+      "compliance": {"gdpr_eu": ["Article 32"]}
+    },
+    {
+      "check_id": "prowler-kms_cmk_rotation_enabled",
+      "title": "Customer-managed KMS key has rotation enabled",
+      "status": "PASS",
+      "severity": "informational",
+      "resource_arn": "arn:aws:kms:eu-west-1:111111111111:key/00000000-aaaa-bbbb-cccc-333333333333",
+      "compliance": {"gdpr_eu": ["Article 32"]}
+    }
+  ]
+}

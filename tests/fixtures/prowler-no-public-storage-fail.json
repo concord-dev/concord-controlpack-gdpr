@@ -1,0 +1,41 @@
+{
+  "fetched_at": "2026-06-05T00:00:00Z",
+  "provider": "aws",
+  "finding_count": 3,
+  "pass_count": 1,
+  "fail_count": 2,
+  "manual_count": 0,
+  "failures_by_check": {
+    "prowler-s3_bucket_public_access": 1,
+    "prowler-s3_account_level_public_access_blocks": 1
+  },
+  "failures_by_severity": {"critical": 1, "high": 1},
+  "findings": [
+    {
+      "check_id": "prowler-s3_bucket_public_access",
+      "title": "S3 bucket allows public read",
+      "status": "FAIL",
+      "severity": "critical",
+      "resource_arn": "arn:aws:s3:::public-uploads",
+      "remediation": "Enable BlockPublicAcls + IgnorePublicAcls + BlockPublicPolicy + RestrictPublicBuckets on the bucket",
+      "compliance": {"gdpr_eu": ["Article 25"]}
+    },
+    {
+      "check_id": "prowler-s3_account_level_public_access_blocks",
+      "title": "Account-level S3 public access block is off",
+      "status": "FAIL",
+      "severity": "high",
+      "resource_arn": "arn:aws:s3:::account-block",
+      "remediation": "s3control put-public-access-block with all four settings true",
+      "compliance": {"gdpr_eu": ["Article 25"]}
+    },
+    {
+      "check_id": "prowler-s3_bucket_public_access",
+      "title": "S3 bucket has public access blocked",
+      "status": "PASS",
+      "severity": "informational",
+      "resource_arn": "arn:aws:s3:::private-data",
+      "compliance": {"gdpr_eu": ["Article 25"]}
+    }
+  ]
+}

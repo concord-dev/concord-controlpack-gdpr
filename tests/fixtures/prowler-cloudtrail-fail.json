@@ -1,0 +1,43 @@
+{
+  "fetched_at": "2026-06-05T00:00:00Z",
+  "provider": "aws",
+  "finding_count": 3,
+  "pass_count": 0,
+  "fail_count": 3,
+  "manual_count": 0,
+  "failures_by_check": {
+    "prowler-cloudtrail_multi_region_enabled": 1,
+    "prowler-cloudtrail_log_file_validation_enabled": 1,
+    "prowler-cloudtrail_logs_s3_bucket_is_not_publicly_accessible": 1
+  },
+  "failures_by_severity": {"high": 3},
+  "findings": [
+    {
+      "check_id": "prowler-cloudtrail_multi_region_enabled",
+      "title": "No multi-region CloudTrail trail exists",
+      "status": "FAIL",
+      "severity": "high",
+      "resource_arn": "arn:aws:cloudtrail:eu-west-1:111111111111:trail/legacy-single-region",
+      "remediation": "Create a trail with --is-multi-region-trail true and --is-organization-trail true",
+      "compliance": {"gdpr_eu": ["Article 30"]}
+    },
+    {
+      "check_id": "prowler-cloudtrail_log_file_validation_enabled",
+      "title": "CloudTrail log-file validation is disabled",
+      "status": "FAIL",
+      "severity": "high",
+      "resource_arn": "arn:aws:cloudtrail:eu-west-1:111111111111:trail/legacy-single-region",
+      "remediation": "Update the trail with --enable-log-file-validation",
+      "compliance": {"gdpr_eu": ["Article 30"]}
+    },
+    {
+      "check_id": "prowler-cloudtrail_logs_s3_bucket_is_not_publicly_accessible",
+      "title": "CloudTrail log bucket allows public access",
+      "status": "FAIL",
+      "severity": "high",
+      "resource_arn": "arn:aws:s3:::ct-logs-legacy",
+      "remediation": "Apply a deny-public bucket policy and enable BlockPublicAcls + BlockPublicPolicy",
+      "compliance": {"gdpr_eu": ["Article 30"]}
+    }
+  ]
+}

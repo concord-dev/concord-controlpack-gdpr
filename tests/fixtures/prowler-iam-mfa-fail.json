@@ -1,0 +1,41 @@
+{
+  "fetched_at": "2026-06-05T00:00:00Z",
+  "provider": "aws",
+  "finding_count": 3,
+  "pass_count": 1,
+  "fail_count": 2,
+  "manual_count": 0,
+  "failures_by_check": {
+    "prowler-iam_root_mfa_enabled": 1,
+    "prowler-iam_user_mfa_enabled_console_access": 1
+  },
+  "failures_by_severity": {"high": 2},
+  "findings": [
+    {
+      "check_id": "prowler-iam_root_mfa_enabled",
+      "title": "Root account has MFA enabled",
+      "status": "FAIL",
+      "severity": "high",
+      "resource_arn": "arn:aws:iam::111111111111:root",
+      "remediation": "Enable a hardware MFA device for the root account in the IAM console",
+      "compliance": {"gdpr_eu": ["Article 32"]}
+    },
+    {
+      "check_id": "prowler-iam_user_mfa_enabled_console_access",
+      "title": "Console-enabled IAM users without MFA",
+      "status": "FAIL",
+      "severity": "high",
+      "resource_arn": "arn:aws:iam::111111111111:user/legacy-ops",
+      "remediation": "Attach a virtual MFA device or revoke console access",
+      "compliance": {"gdpr_eu": ["Article 32"]}
+    },
+    {
+      "check_id": "prowler-iam_avoid_root_usage",
+      "title": "Root account has not been used in last 1 day",
+      "status": "PASS",
+      "severity": "informational",
+      "resource_arn": "arn:aws:iam::111111111111:root",
+      "compliance": {"gdpr_eu": ["Article 32"]}
+    }
+  ]
+}
