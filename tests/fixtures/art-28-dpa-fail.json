@@ -1,0 +1,16 @@
+{
+  "attestation": {
+    "kind": "dpa",
+    "owner": "vendor-mgmt@example.com",
+    "attested_at": "2026-01-01T00:00:00Z",
+    "expires_at": "2099-12-31T23:59:59Z",
+    "version": 1,
+    "attested_fields": {
+      "sub_processors": [
+        {"name": "AWS", "dpa_signed_at": "2025-06-01",
+         "location": "Ireland", "outside_eea": false},
+        {"name": "Datadog", "location": "USA", "outside_eea": true}
+      ]
+    }
+  }
+}

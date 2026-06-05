@@ -1,0 +1,50 @@
+apiVersion: concord.dev/v1
+kind: Control
+
+metadata:
+  id: GDPR-ART-35-DPIA
+  name: gdpr-art-35-dpia
+  title: Data Protection Impact Assessment (DPIA) signed for high-risk processing
+  framework: gdpr
+  category: Governance
+  severity: high
+  tags:
+    - gdpr
+    - dpia
+    - governance
+  owners:
+    - team: legal
+
+spec:
+  description: |
+    GDPR Article 35 requires a DPIA when processing is likely to result in
+    high risk to data subjects. Concord verifies a cosigned DPIA attestation
+    exists with the four EDPB-required sections: processing description,
+    necessity assessment, risks identified, mitigations applied.
+
+  rationale: |
+    DPIAs are the most common GDPR-paperwork ask during enterprise sales.
+    Auditors will ask for one specifically; not having a current signed
+    DPIA is a blocking finding for high-risk processing.
+
+  evidence:
+    - id: attestation
+      source: attestation
+      type: policy_attestation
+      fixture: ../tests/fixtures/art-35-dpia-pass.json
+      params:
+        kind: dpia
+        schema: schemas/dpia.yaml
+
+  policy:
+    engine: rego
+    package: concord.gdpr.art_35_dpia
+    file: ../policies/art_35_dpia.rego
+
+  remediation:
+    runbook: docs/remediation/gdpr-art-35-dpia.md
+    auto_fix: false
+    estimated_effort: 2d
+
+  status: stable
+  blocking: true

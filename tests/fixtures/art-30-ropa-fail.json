@@ -1,0 +1,14 @@
+{
+  "attestation": {
+    "kind": "ropa",
+    "owner": "dpo@example.com",
+    "attested_at": "2023-01-01T00:00:00Z",
+    "expires_at": "2024-01-01T00:00:00Z",
+    "version": 1,
+    "attested_fields": {
+      "controller": {"name": "Example Co"},
+      "dpo_contact": "dpo@example.com",
+      "processing_activities": []
+    }
+  }
+}

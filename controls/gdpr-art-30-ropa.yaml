@@ -1,0 +1,55 @@
+apiVersion: concord.dev/v1
+kind: Control
+
+metadata:
+  id: GDPR-ART-30-ROPA
+  name: gdpr-art-30-ropa
+  title: Records of Processing Activities (ROPA) attested by the DPO
+  framework: gdpr
+  category: Governance
+  severity: high
+  tags:
+    - gdpr
+    - governance
+    - ropa
+  owners:
+    - team: legal
+
+spec:
+  description: |
+    GDPR Article 30 requires both controllers and processors to maintain a
+    Records of Processing Activities document. Concord doesn't try to
+    generate this — it verifies that the org has a cosign-signed YAML
+    check-in (the attestation) with the schema required by the EDPB
+    template (controller, processing activities, retention, etc.).
+
+  rationale: |
+    Article 30 is one of the most reliably-cited GDPR articles in
+    enforcement actions. Audit-evidence-wise it's paperwork: a current,
+    signed ROPA that names a DPO and lists every processing activity.
+
+  evidence:
+    - id: attestation
+      source: attestation
+      type: policy_attestation
+      fixture: ../tests/fixtures/art-30-ropa-pass.json
+      params:
+        kind: ropa
+        schema: schemas/ropa.yaml
+
+  policy:
+    engine: rego
+    package: concord.gdpr.art_30_ropa
+    file: ../policies/art_30_ropa.rego
+
+  remediation:
+    runbook: docs/remediation/gdpr-art-30-ropa.md
+    auto_fix: false
+    estimated_effort: 1d
+
+  mappings:
+    iso27001:
+      - "A.5.34"
+
+  status: stable
+  blocking: true

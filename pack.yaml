@@ -3,8 +3,14 @@ kind: ControlPack
 metadata:
   id: gdpr
   name: gdpr
-  version: v0.1.1
+  version: v0.2.0
   framework_label: GDPR (EU)
+  attribution:
+    sources:
+      - prowler
+      - steampipe-powerpipe
+      - cnil-templates
+      - edpb-guidelines
 spec:
   controls:
     - gdpr-art-5-log-retention
@@ -15,8 +21,13 @@ spec:
     - gdpr-art-32-encryption-in-transit
     - gdpr-art-32-kms-key-rotation
     - gdpr-art-32-mfa-privileged
+    - gdpr-art-28-dpa
+    - gdpr-art-30-ropa
+    - gdpr-art-35-dpia
   evidence_sources:
     - source: prowler
       version: ">=v0.1.0,<v1.0.0"
     - source: aws
+      version: ">=v0.1.0,<v1.0.0"
+    - source: attestation
       version: ">=v0.1.0,<v1.0.0"

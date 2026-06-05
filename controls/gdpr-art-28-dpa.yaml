@@ -1,0 +1,51 @@
+apiVersion: concord.dev/v1
+kind: Control
+
+metadata:
+  id: GDPR-ART-28-DPA
+  name: gdpr-art-28-dpa
+  title: Sub-processors covered by signed DPAs with valid transfer mechanisms
+  framework: gdpr
+  category: Sub-processors
+  severity: high
+  tags:
+    - gdpr
+    - dpa
+    - sub-processors
+  owners:
+    - team: legal
+
+spec:
+  description: |
+    GDPR Article 28 requires processors to enter into a contract with each
+    sub-processor that imposes equivalent obligations. Concord verifies a
+    cosigned DPA attestation lists every sub-processor with: name,
+    signed_at date, location, and (if outside the EEA) a recognised
+    transfer mechanism such as Standard Contractual Clauses.
+
+  rationale: |
+    Sub-processor management is the single most common cause of post-Schrems-II
+    enforcement actions. Auditors will spot-check that named sub-processors
+    have current DPAs and SCC-or-equivalent transfer cover.
+
+  evidence:
+    - id: attestation
+      source: attestation
+      type: policy_attestation
+      fixture: ../tests/fixtures/art-28-dpa-pass.json
+      params:
+        kind: dpa
+        schema: schemas/dpa.yaml
+
+  policy:
+    engine: rego
+    package: concord.gdpr.art_28_dpa
+    file: ../policies/art_28_dpa.rego
+
+  remediation:
+    runbook: docs/remediation/gdpr-art-28-dpa.md
+    auto_fix: false
+    estimated_effort: 1w
+
+  status: stable
+  blocking: true
