@@ -38,9 +38,10 @@ deny contains msg if {
 }
 
 warn contains msg if {
+    now_ns := time.now_ns()
     input.attestation.expires_at
     expiry := time.parse_rfc3339_ns(input.attestation.expires_at)
-    expiry <= (time.now_ns() + 30 * 24 * 3600 * 1000 * 1000 * 1000)
-    expiry > time.now_ns()
+    expiry <= (now_ns + 30 * 24 * 3600 * 1000 * 1000 * 1000)
+    expiry > now_ns
     msg := sprintf("attestation expires within 30 days (%s) — schedule re-sign", [input.attestation.expires_at])
 }
